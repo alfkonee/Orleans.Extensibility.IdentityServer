@@ -6,7 +6,7 @@ using Orleans.Extensibility.IdentityServer.Grains;
 namespace Orleans.Extensibility.IdentityServer.Mappers
 {
     /// <summary>
-    /// AutoMapper configuration for Client
+    /// AutoMapper configuration for OrleansClient
     /// Between model and entity
     /// </summary>
     internal class ClientMapperProfile : Profile
@@ -19,7 +19,7 @@ namespace Orleans.Extensibility.IdentityServer.Mappers
         public ClientMapperProfile()
         {
             // entity to model
-            CreateMap<Client, IdentityServer4.Models.Client>(MemberList.Destination)
+            CreateMap<OrleansClient, IdentityServer4.Models.Client>(MemberList.Destination)
                 .ForMember(x => x.AllowedGrantTypes,
                     opt => opt.MapFrom(src => src.AllowedGrantTypes))
                 .ForMember(x => x.RedirectUris, opt => opt.MapFrom(src => src.RedirectUris))
@@ -33,11 +33,11 @@ namespace Orleans.Extensibility.IdentityServer.Mappers
                 .ForMember(x => x.AllowedCorsOrigins,
                     opt => opt.MapFrom(src => src.AllowedCorsOrigins));
 
-            CreateMap<Secret, IdentityServer4.Models.Secret>(MemberList.Destination)
+            CreateMap<OrleansSecret, IdentityServer4.Models.Secret>(MemberList.Destination)
                 .ForMember(dest => dest.Type, opt => opt.Condition(srs => srs != null));
 
             // model to entity
-            CreateMap<IdentityServer4.Models.Client, Client>(MemberList.Source)
+            CreateMap<IdentityServer4.Models.Client, OrleansClient>(MemberList.Source)
                 .ForMember(x => x.AllowedGrantTypes,
                     opt => opt.MapFrom(src => src.AllowedGrantTypes))
                 .ForMember(x => x.RedirectUris,
@@ -57,7 +57,7 @@ namespace Orleans.Extensibility.IdentityServer.Mappers
                             src => src.IdentityProviderRestrictions))
                 .ForMember(x => x.AllowedCorsOrigins,
                     opt => opt.MapFrom(src => src.AllowedCorsOrigins));
-            CreateMap<IdentityServer4.Models.Secret, Secret>(MemberList.Source);
+            CreateMap<IdentityServer4.Models.Secret, OrleansSecret>(MemberList.Source);
         }
     }
 }

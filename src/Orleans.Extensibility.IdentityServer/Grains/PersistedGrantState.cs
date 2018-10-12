@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Orleans.Extensibility.IdentityServer.Grains
 {
-    internal class PersistedGrantState
+    public class PersistedGrantState
     {
         public ISubjectGrantCollectionGrain Collection { get; set; }
         public PersistedGrant Grant { get; set; }
@@ -20,7 +20,7 @@ namespace Orleans.Extensibility.IdentityServer.Grains
         public string Data { get; set; }
     }
 
-    internal class SubjectGrantCollectionState
+    public class SubjectGrantCollectionState
     {
         public Dictionary<string, IPersistedGrantGrain> ByClientId { get; set; } = new Dictionary<string, IPersistedGrantGrain>();
         public Dictionary<Tuple<string, string>, IPersistedGrantGrain> ByClientIdAndType { get; set; } = new Dictionary<Tuple<string, string>, IPersistedGrantGrain>();

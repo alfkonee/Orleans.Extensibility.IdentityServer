@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace Orleans.Extensibility.IdentityServer.Grains
 {
     //Key == Grant Key
-    internal interface IPersistedGrantGrain : IGrainWithStringKey
+    public interface IPersistedGrantGrain : IGrainWithStringKey
     {
         Task Create(ISubjectGrantCollectionGrain collection, PersistedGrant grant);
         Task<PersistedGrant> GetData();

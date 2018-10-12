@@ -7,18 +7,19 @@ using static IdentityServer4.IdentityServerConstants;
 
 namespace Orleans.Extensibility.IdentityServer.Grains
 {
-    internal class ClientState
+    public class ClientState
     {
-        public Client Client { get; set; }
+        public OrleansClient OrleansClient { get; set; }
     }
 
-    internal class Client
+    public class OrleansClient
     {
         public bool Enabled { get; set; } = true;
         public string ProtocolType { get; set; } = ProtocolTypes.OpenIdConnect;
-        public List<Secret> ClientSecrets { get; set; }
+        public List<OrleansSecret> ClientSecrets { get; set; }
         public bool RequireClientSecret { get; set; } = true;
         public string ClientName { get; set; }
+        public string ClientId { get; set; }
         public string ClientUri { get; set; }
         public string LogoUri { get; set; }
         public bool RequireConsent { get; set; } = true;
@@ -52,7 +53,7 @@ namespace Orleans.Extensibility.IdentityServer.Grains
         public List<string> AllowedCorsOrigins { get; set; }
     }
 
-    internal class Secret
+    public class OrleansSecret
     {
         public string Description { get; set; }
         public string Value { get; set; }
@@ -60,7 +61,7 @@ namespace Orleans.Extensibility.IdentityServer.Grains
         public string Type { get; set; } = SecretTypes.SharedSecret;
     }
 
-    internal class ClientClaim
+    public class ClientClaim
     {
         public int Id { get; set; }
         public string Type { get; set; }

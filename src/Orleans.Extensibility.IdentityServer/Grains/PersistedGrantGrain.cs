@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Orleans.Extensibility.IdentityServer.Grains
 {
-    internal class PersistedGrantGrain : Grain<PersistedGrantState>, IPersistedGrantGrain
+    public class PersistedGrantGrain : Grain<PersistedGrantState>, IPersistedGrantGrain
     {
         public Task Create(ISubjectGrantCollectionGrain collection, PersistedGrant grant)
         {

@@ -13,14 +13,14 @@ namespace Orleans.Extensibility.IdentityServer.Mappers
 
         internal static IMapper Mapper { get; }
 
-        internal static IdentityServer4.Models.Client ToModel(this Client client)
+        internal static IdentityServer4.Models.Client ToModel(this OrleansClient orleansClient)
         {
-            return Mapper.Map<IdentityServer4.Models.Client>(client);
+            return Mapper.Map<IdentityServer4.Models.Client>(orleansClient);
         }
 
-        internal static Client ToEntity(this IdentityServer4.Models.Client client)
+        internal static OrleansClient ToEntity(this IdentityServer4.Models.Client client)
         {
-            return Mapper.Map<Client>(client);
+            return Mapper.Map<OrleansClient>(client);
         }
     }
 }
