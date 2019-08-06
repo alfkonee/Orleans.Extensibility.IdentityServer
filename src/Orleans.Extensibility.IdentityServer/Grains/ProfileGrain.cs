@@ -7,7 +7,7 @@ using Orleans.Providers;
 namespace Orleans.Extensibility.IdentityServer.Grains
 {
     [StorageProvider]
-    public class ProfileGrain : IndexableGrain<UserProfile,UserProfile>, IProfileGrain
+    public class ProfileGrain : IGrainWithIntegerKey, IProfileGrain
     {
         public async Task<UserProfile> GetProfileData()
         {
