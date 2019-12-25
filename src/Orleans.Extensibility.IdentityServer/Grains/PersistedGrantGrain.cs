@@ -19,7 +19,7 @@ namespace Orleans.Extensibility.IdentityServer.Grains
 
         public async Task Remove()
         {
-            await State.Collection.RemoveGrant(this.State.Grant);
+            await State.Collection.RemoveGrant(State.Grant);
             State.Collection = null;
             State.Grant = null;
             await ClearStateAsync();

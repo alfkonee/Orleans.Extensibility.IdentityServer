@@ -8,7 +8,7 @@ namespace Orleans.Extensibility.IdentityServer.Grains
 {
     internal class ClientGrain : Grain<ClientState>, IClientGrain
     {
-        public Task<IdentityServer4.Models.Client> GetClientData()
+        public Task<Client> GetClientData()
         {
             var clientData = State.OrleansClient?.ToModel();
             if (clientData != null)
@@ -16,7 +16,7 @@ namespace Orleans.Extensibility.IdentityServer.Grains
             return Task.FromResult(State.OrleansClient?.ToModel());
         }
 
-        public Task Create(IdentityServer4.Models.Client client)
+        public Task Create(Client client)
         {
             if (client == null) throw new ArgumentNullException(nameof(client));
             State.OrleansClient = client.ToEntity();

@@ -1,15 +1,18 @@
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityModel;
 using IdentityServer4.Validation;
+using Orleans.Extensibility.IdentityServer.Grains;
 using Orleans.Extensibility.IdentityServer.Stores;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public class OrleansResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
+    public class OrleansResourceOwnerPasswordValidator<TUser> : IResourceOwnerPasswordValidator where TUser: UserState
     {
-        private readonly IUserStore _userRepository;
+        private readonly IOrleansUserStore<TUser> _userRepository;
  
-        public OrleansResourceOwnerPasswordValidator(IUserStore userRepository)
+        public OrleansResourceOwnerPasswordValidator(IOrleansUserStore<TUser> userRepository)
         {
             _userRepository = userRepository;
         }
@@ -19,7 +22,9 @@ namespace Microsoft.Extensions.DependencyInjection
             if (await _userRepository.ValidateCredentials(context.UserName, context.Password))
             {
                 var user = await (await _userRepository.FindByUsername(context.UserName)).GetUserData();
-                context.Result = new GrantValidationResult(user.SubjectId, OidcConstants.AuthenticationMethods.Password);
+                
+                context.Result = new GrantValidationResult(user.SubjectId, OidcConstants.AuthenticationMethods.Password,
+                    user.Claims.Select(c=> new Claim(c.Key,c.Value)));
             }
  
         }

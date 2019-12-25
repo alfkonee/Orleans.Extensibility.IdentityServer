@@ -50,7 +50,7 @@ namespace Orleans.Extensibility.IdentityServer.Mappers
                 .ForMember(x => x.AllowedScopes,
                     opt => opt.MapFrom(src => src.AllowedScopes))
                 .ForMember(x => x.Claims,
-                    opt => opt.MapFrom(src => src.Claims.Select(x => new ClientClaim {Type = x.Type, Value = x.Value})))
+                    opt => opt.MapFrom(src => src.Claims.Select(x => new ClientClaim { Type = x.Type, Value = x.Value })))
                 .ForMember(x => x.IdentityProviderRestrictions,
                     opt =>
                         opt.MapFrom(
